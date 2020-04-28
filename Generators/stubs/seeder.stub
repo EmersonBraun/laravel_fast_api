@@ -1,0 +1,19 @@
+
+<?php
+
+use Illuminate\Database\Seeder;
+use {{ rootNamespace }}Models{{ subdiretory }}\{{ nameClass }};
+
+class {{ nameClass }}Seeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $amount = 10;
+        factory({{ nameClass }}::class, $amount)->create();
+    }
+}

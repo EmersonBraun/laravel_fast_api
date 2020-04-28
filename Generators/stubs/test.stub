@@ -1,0 +1,194 @@
+<?php
+
+namespace Tests\Unit{{ subdiretory }};
+
+use PHPUnit\Framework\TestCase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use App\Models{{ subdiretory }}\{{ nameClass }};
+use App\Repositories{{ subdiretory }}\{{ nameClass }}Repository;
+
+class {{ nameClass }}UnitTest extends TestCase
+{
+    use DatabaseMigrations;
+ 
+    /** @test 
+	 * Index
+	 *
+	 * @return void
+	 */
+	public function test{{ nameClass }}IndexWithError()
+	{
+        //
+	}
+
+	/** @test 
+	 * Index
+	 *
+	 * @return void
+	 */
+	public function test{{ nameClass }}Index()
+	{
+        // 
+	}
+
+	/** @test 
+	 * Create
+	 *
+	 * @return void
+	 */
+	public function test{{ nameClass }}CreateWithError()
+	{
+        //
+	}
+
+	/** @test 
+	 * Create
+	 *
+	 * @return void
+	 */
+	public function test{{ nameClass }}Create()
+	{
+        // 
+	}
+
+	/** @test 
+	 * Store
+	 *
+	 * @return void
+	 */
+	public function test{{ nameClass }}StoreWithError()
+	{
+        // 
+	}
+
+	/** @test 
+	 * Store
+	 *
+	 * @return void
+	 */
+	public function test{{ nameClass }}Store()
+	{
+        //
+	}
+
+	/** @test 
+	 * Show
+	 *
+	 * @return void
+	 */
+	public function test{{ nameClass }}ShowWithError()
+	{
+        //
+	}
+
+	/** @test 
+	 * Show
+	 *
+	 * @return void
+	 */
+	public function test{{ nameClass }}Show()
+	{
+        //
+	}
+
+	/** @test 
+	 * Edit
+	 *
+	 * @return void
+	 */
+	public function test{{ nameClass }}EditWithError()
+	{
+        // 
+	}
+
+	/** @test 
+	 * Edit
+	 *
+	 * @return void
+	 */
+	public function test{{ nameClass }}Edit()
+	{
+        //
+	}
+
+	/** @test 
+	 * Update
+	 *
+	 * @return void
+	 */
+	public function test{{ nameClass }}UpdateWithError()
+	{
+        //
+	}
+
+	/** @test 
+	 * Update
+	 *
+	 * @return void
+	 */
+	public function test{{ nameClass }}Update()
+	{
+        //
+	}
+
+	/** @test 
+	 * Destroy
+	 *
+	 * @return void
+	 */
+	public function test{{ nameClass }}DestroyWithError()
+	{
+        //
+	}
+
+	/** @test 
+	 * Destroy
+	 *
+	 * @return void
+	 */
+	public function test{{ nameClass }}Destroy()
+	{
+        // 
+	}
+
+	/** @test 
+	 * Restore
+	 *
+	 * @return void
+	 */
+	public function test{{ nameClass }}RestoreWithError()
+	{
+        //
+	}
+
+	/** @test 
+	 * Restore
+	 *
+	 * @return void
+	 */
+	public function test{{ nameClass }}Restore()
+	{
+        //
+	}
+
+	/** @test 
+	 * ForceDelete
+	 *
+	 * @return void
+	 */
+	public function test{{ nameClass }}ForceDeleteWithError()
+	{
+        //
+	}
+
+	/** @test 
+	 * ForceDelete
+	 *
+	 * @return void
+	 */
+	public function test{{ nameClass }}ForceDelete()
+	{
+        //
+	}
+
+}
