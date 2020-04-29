@@ -3,7 +3,7 @@
 namespace {{ rootNamespace }}Models{{ subdiretory }};
 
 use Illuminate\Database\Eloquent\Model;
-// use Illuminate\Database\Eloquent\SoftDeletes;
+{{ softDeletes }} use Illuminate\Database\Eloquent\SoftDeletes;
 class {{ nameClass }} extends Model
 {
     /**
@@ -11,7 +11,7 @@ class {{ nameClass }} extends Model
      * Instead, a deleted_at attribute is set on the model and inserted into the database. 
      * If a model has a non-null deleted_at value, the model has been soft deleted
      */
-    // use SoftDeletes;
+    {{ softDeletes }} use SoftDeletes;
 
     /**
      * The table associated with the model.
@@ -32,7 +32,7 @@ class {{ nameClass }} extends Model
      *
      * @var array
      */
-    protected $fillable = {{ fillable }};
+    protected $fillable = {{ filables }};
 
     /**
      * The attributes that aren't mass assignable.

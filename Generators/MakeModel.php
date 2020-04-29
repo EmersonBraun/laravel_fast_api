@@ -16,7 +16,10 @@ class MakeModel
                 '{{ tableName }}',
                 '{{ primaryKey }}',
                 '{{ filables }}',
+                '{{ guarded }}',
+                '{{ casts }}',
                 '{{ timestamps }}',
+                '{{ dates }}',
                 '{{ softDeletes }}',
             ],
             [
@@ -30,6 +33,7 @@ class MakeModel
                 $fields->casts,
                 $fields->timestamps,
                 $fields->dates,
+                $fields->softDeletes
             ],
             self::getStub('model')
         );
@@ -54,7 +58,8 @@ class MakeModel
                 'guarded' => "['id']",
                 'casts' => '[]',
                 'timestamps' => 'false',
-                'dates' => '[]'
+                'dates' => '[]',
+                'softDeletes' => '//'
             ];
         }
     }

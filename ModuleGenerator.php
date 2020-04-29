@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Console\Commands\Utils\Format;
+use App\Console\Commands\Generators\Utils\Format;
 use Illuminate\Support\Str; // laravel < 6 remove this line
 
 use App\Console\Commands\Generators\Generator;
@@ -17,17 +17,7 @@ class ModuleGenerator extends Command
      */
     protected $signature = 'generate:module 
                             {name : Class (singular) for example User} 
-                            {--sub= : Subdirectory where the resource will be placed for example \Models}
-                            {--controller : No create Controller}
-                            {--factory : No create Factory}
-                            {--migration : No create Migration}
-                            {--model : No create Model}
-                            {--observer : No create Observer}
-                            {--repository : No create Repository}
-                            {--request : No create Request}
-                            {--route : No create Route}
-                            {--seeder : No create Seeder}
-                            {--test : No create Test}';
+                            {--sub= : Subdirectory where the resource will be placed for example \Models}';
 
     /**
      * The console command description.
@@ -69,12 +59,9 @@ class ModuleGenerator extends Command
     public function generate($options)
     {
         foreach ($options as $option) {
-            if(!$this->option($option)) {
-                $generated = $this->generator->$option($this->name, $this->opt, null);
-                if($generated) $this->info("Generated {$option}!");
-                else $this->error("Error to generate {$option}!");
-            }
-            else $this->error("Not generated {$option}!");
+            $generated = $this->generator->$option($this->name, $this->opt, null);
+            if($generated) $this->info("Generated {$option}!");
+            else $this->error("Error to generate {$option}!");
         }
     }
 

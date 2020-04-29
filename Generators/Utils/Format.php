@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands\Utils;
+namespace App\Console\Commands\Generators\Utils;
 use Illuminate\Support\Str; // laravel < 6 remove this line
 
 class Format

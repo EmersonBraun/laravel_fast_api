@@ -29,7 +29,7 @@ class MakeMigration
         );
         $basedir = FileUtils::baseDirFile('', 'database', 'migrations');
         FileUtils::createFolder($basedir);
-        $name = date('Y').'_'.date('m').'_'.date('d').date('his').'_create_table_'.$name->nameSnake.'_table.php';
+        $name = date('Y').'_'.date('m').'_'.date('d').date('his').'_create_'.$name->nameSnake.'_table.php';
         $create = file_put_contents($basedir.$name, $template);
         return $create;
     }

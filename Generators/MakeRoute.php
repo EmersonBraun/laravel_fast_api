@@ -12,10 +12,12 @@ class MakeRoute
             [
                 '{{ nameClass }}',
                 '{{ nameLower }}',
+                '{{ subdiretory }}'
             ],
             [
                 $name->nameClass,
                 $name->nameLower,
+                $subdiretory
             ],
             self::getStub('route.api')
         );

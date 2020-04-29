@@ -1,34 +1,17 @@
 <?php
 namespace App\Repositories;
 
+use App\Traits\ResponseTrait;
 class BaseRepository
 {
+    use ResponseTrait;
+    
     protected $model;
     protected $obj = [];
-    protected $returnType = 'error';
     protected $returnMsg = '';
-    protected $returnContent = '';
+    protected $contentError = '';
     protected $statusCode = 400;
     protected $options = 0;
-
-    /**
-     * Mount return.
-     *
-     * @return array
-     */
-    public function mountReturn()
-    {
-        return (object) [
-            'data' => $this->obj,
-            'status' => $this->statusCode,
-            'headers' => [
-                'returnType' => $this->returnType,
-                'returnMsg' => $this->returnMsg,
-                'returnContent' => $this->returnContent,
-            ],
-            'options' => $this->options
-        ];
-    }
 
     /**
      * List all resources withoutTrashed.
@@ -39,14 +22,12 @@ class BaseRepository
     {
         try{
             $this->obj = $this->model->all();
-            $this->returnType = 'success';
             $this->statusCode = 200;
         } catch(\Throwable $th) {
-            $this->returnMsg = trans('transations.load.error');
-            $this->returnContent = $th->getMessage();
+            $this->contentError = $th->getMessage();
         }
 
-        return $this->mountReturn();
+        return $this->mountReturn('load', $this->obj, $this->statusCode, $this->contentError);
     }
 
     /**
@@ -58,14 +39,12 @@ class BaseRepository
     {
         try{
             $this->obj = $this->model->withTrashed()->get();
-            $this->returnType = 'success';
             $this->statusCode = 200;
         } catch(\Throwable $th) {
-            $this->returnMsg = trans('transations.load.error');
-            $this->returnContent = $th->getMessage();
+            $this->contentError = $th->getMessage();
         }
 
-        return $this->mountReturn();
+        return $this->mountReturn('load', $this->obj, $this->statusCode, $this->contentError);
     }
 
     /**
@@ -77,14 +56,12 @@ class BaseRepository
     {
         try{
             $this->obj = $this->model->onlyTrashed()->get();
-            $this->returnType = 'success';
             $this->statusCode = 200;
         } catch(\Throwable $th) {
-            $this->returnMsg = trans('transations.load.error');
-            $this->returnContent = $th->getMessage();
+            $this->contentError = $th->getMessage();
         }
 
-        return $this->mountReturn();
+        return $this->mountReturn('load', $this->obj, $this->statusCode, $this->contentError);
     }
 
     /**
@@ -97,15 +74,13 @@ class BaseRepository
     {
         try{
             $this->obj = $this->model->findOrFail($id);
-            $this->returnType = 'success';
             $this->statusCode = 200;
         } catch(\Throwable $th) {
-            $this->returnMsg = trans('transations.found.error');
-            $this->returnContent = $th->getMessage();
+            $this->contentError = $th->getMessage();
             $this->statusCode = 404;
         }
 
-        return $this->mountReturn();
+        return $this->mountReturn('found', $this->obj, $this->statusCode, $this->contentError);
     }
 
     /**
@@ -119,16 +94,13 @@ class BaseRepository
 
         try {
             $this->obj = $this->model->create($data);
-            $this->returnType = 'success';
-            $this->returnMsg = trans('transations.create.success');
             $this->statusCode = 201;
         } catch (\Throwable $th) {
-            $this->returnMsg = trans('transations.create.error');
-            $this->returnContent = $th->getMessage();
+            $this->contentError = $th->getMessage();
             $this->statusCode = 400;
         }
 
-        return $this->mountReturn();
+        return $this->mountReturn('create', $this->obj, $this->statusCode, $this->contentError);
     }   
 
     /**
@@ -145,16 +117,12 @@ class BaseRepository
             $res->update($data);
             $this->obj = $res->getChanges();
             $this->statusCode = 200;
-            $this->returnType = 'success';
-            if(!$res->getChanges()) $this->returnMsg = trans('transations.update.same');
-            else $this->returnMsg = trans('transations.update.success');
         } catch (\Throwable $th) {
-            $this->returnMsg = trans('transations.update.error');
-            $this->returnContent = $th->getMessage();
+            $this->contentError = $th->getMessage();
             $this->statusCode = 400;
         }
 
-        return $this->mountReturn();
+        return $this->mountReturn('update', $this->obj, $this->statusCode, $this->contentError);
     }
 
     /**
@@ -168,15 +136,12 @@ class BaseRepository
         try {
             $this->obj = $this->model->find($id)->delete();
             $this->statusCode = 200;
-            $this->returnType = 'success';
-            $this->returnMsg = trans('transations.delete.success');
         } catch (\Throwable $th) {
-            $this->returnMsg = trans('transations.delete.error');
-            $this->returnContent = $th->getMessage();
+            $this->contentError = $th->getMessage();
             $this->statusCode = 400;
         }
 
-        return $this->mountReturn();
+        return $this->mountReturn('delete', $this->obj, $this->statusCode, $this->contentError);
     }
 
     /**
@@ -190,16 +155,13 @@ class BaseRepository
 	{
         try {
             $this->obj = $this->model->withTrashed()->findOrFail($id)->restore();
-            $this->returnType = 'success';
-            $this->returnMsg = trans('transations.restore.success');
             $this->statusCode = 200;
         } catch (\Throwable $th) {
-            $this->returnMsg = trans('transations.restore.error');
-            $this->returnContent = $th->getMessage();
+            $this->contentError = $th->getMessage();
             $this->statusCode = 400;
         }
 
-        return $this->mountReturn();
+        return $this->mountReturn('restore', $this->obj, $this->statusCode, $this->contentError);
     }
 
     /**
@@ -213,16 +175,13 @@ class BaseRepository
 	{
         try {
             $this->obj = $this->model->withTrashed()->findOrFail($id)->forceDelete();
-            $this->returnType = 'success';
-            $this->returnMsg = trans('transations.forceDelete.success');
             $this->statusCode = 200;
         } catch (\Throwable $th) {
-            $this->returnMsg = trans('transations.forceDelete.error');
-            $this->returnContent = $th->getMessage();
+            $this->contentError = $th->getMessage();
             $this->statusCode = 400;
         }
 
-        return $this->mountReturn();
+        return $this->mountReturn('forceDelete', $this->obj, $this->statusCode, $this->contentError);
     }
 
     /**
@@ -236,7 +195,7 @@ class BaseRepository
         $fillable = $this->model->getFillable();
         $send = array_keys($data);
 
-        if($diff) return trans('transations.diff_fields',['expected'=> implode(',',$diff), 'sended' => implode(',', $fillable)]); 
+        if($diff) return trans('transation.diff_fields',['expected'=> implode(',',$diff), 'sended' => implode(',', $fillable)]); 
         return false;
     }
 

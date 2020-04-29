@@ -5,11 +5,14 @@ namespace {{ rootNamespace }}Repositories{{ subdiretory }};
 use {{ rootNamespace }}Models{{ subdiretory }}\{{ nameClass }};
 use {{ rootNamespace }}Repositories\BaseRepository;
 
+use App\Traits\ResponseTrait;
 /**
 * Repository Pattern allows encapsulation of data access logic
 */
 class {{ nameClass }}Repository extends BaseRepository
 {
+    use ResponseTrait;
+
     protected $model;
     protected $obj = [];
     protected $returnType = 'error';
@@ -33,13 +36,11 @@ class {{ nameClass }}Repository extends BaseRepository
     {
         try{
             $this->obj = $this->model->where(['name'=> $foo, 'age' => $bar])->get();
-            $this->returnType = 'success';
             $this->statusCode = 200;
         } catch(\Throwable $th) {
-            $this->returnMsg = trans('transations.load.error');
             $this->returnContent = $th->getMessage();
         }
-
-        return $this->mountReturn();
+        $typeFunction = 'load'; // may load,found,create,update,delete,restore or forceDelete
+        return $this->mountReturn($typeFunction, $this->obj, $this->statusCode, $this->contentError);
     }
 }

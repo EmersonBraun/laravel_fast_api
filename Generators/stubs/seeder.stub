@@ -4,7 +4,7 @@
 use Illuminate\Database\Seeder;
 use {{ rootNamespace }}Models{{ subdiretory }}\{{ nameClass }};
 
-class {{ nameClass }}Seeder extends Seeder
+class {{ nameClass }}TableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

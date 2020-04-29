@@ -4,7 +4,7 @@ Route::group(['as'=>'{{ nameLower }}.','prefix' =>'{{ nameLower }}'],function(){
     Route::post('',['as' =>'store','uses'=>'{{ subdiretory }}{{ nameClass }}Controller@store']);
     Route::get('/{id}',['as' =>'show','uses'=>'{{ subdiretory }}{{ nameClass }}Controller@show']);
     Route::put('/{id}',['as' =>'update','uses'=>'{{ subdiretory }}{{ nameClass }}Controller@update']);
-    Route::delete('destroy/{id}',['as' =>'destroy','uses'=>'{{ subdiretory }}{{ nameClass }}Controller@destroy']);
+    Route::delete('/{id}',['as' =>'destroy','uses'=>'{{ subdiretory }}{{ nameClass }}Controller@destroy']);
     // Route::put('update/{id}',['as' =>'restore','uses'=>'{{ subdiretory }}{{ nameClass }}Controller@restore']); // to restore {{ nameLower }}, if use softDelete
     // Route::delete('destroy/{id}',['as' =>'forceDelete','uses'=>'{{ subdiretory }}{{ nameClass }}Controller@forceDelete']); // to remove {{ nameLower }} definitely, if use softDelete
 });
