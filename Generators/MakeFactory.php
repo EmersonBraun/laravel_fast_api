@@ -7,7 +7,7 @@ class MakeFactory
     public static function create($name, $opt, $fields=null)
     {
         $subdiretory = FileUtils::changeBar($opt->sub,'\\');
-        $fields = $fields ? $fields : '// \'key\' => $factory->boolean(50),';
+        $fields = $fields ? $fields : '// \'key\' => $faker->boolean(50),';
         $template = str_replace(
             [
                 '{{ subdiretory }}',
